@@ -1,10 +1,10 @@
-package com.stanzione.footballquiz.data
+package com.stanzione.footballquiz.main.data.repository.datasource.local
 
 import com.stanzione.footballquiz.main.data.model.Category
 
-class CategoriesMemoryData {
+class CategoryLocalDataSourceImpl : CategoryLocalDataSource {
 
-    fun getCategories(): List<Category> {
+    override fun getCategories(): List<Category> {
         return listOf(
             Category(
                 id = 1,
