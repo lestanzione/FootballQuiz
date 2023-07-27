@@ -7,18 +7,18 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.tooling.preview.Preview
+import com.stanzione.footballquiz.main.data.model.Category
 
 @Composable
-fun MainScreen() {
-    val numbers = (0..19).toList()
+fun MainScreen(categories: List<Category>) {
 
     LazyVerticalGrid(
         columns = GridCells.Fixed(2)
     ) {
-        items(numbers.size) {
+        items(categories.size) {index ->
             Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                Text(text = "Number")
-                Text(text = "$it")
+                Text(text = categories[index].label)
+                Text(text = categories[index].id.toString())
             }
         }
     }
@@ -27,5 +27,5 @@ fun MainScreen() {
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
-    MainScreen()
+    MainScreen(listOf())
 }
