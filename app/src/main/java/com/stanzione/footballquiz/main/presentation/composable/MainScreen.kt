@@ -8,10 +8,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.stanzione.footballquiz.main.data.model.Category
+import com.stanzione.footballquiz.main.presentation.MainViewModel
 import com.stanzione.footballquiz.main.presentation.composable.component.CategoryButton
 
 @Composable
-fun MainScreen(categories: List<Category>) {
+fun MainScreen(
+    categories: List<Category>,
+    onUiAction: (MainViewModel.UiAction) -> Unit
+) {
 
     LazyVerticalGrid(
         columns = GridCells.Fixed(2),
@@ -22,7 +26,7 @@ fun MainScreen(categories: List<Category>) {
         items(categories.size) { index ->
             CategoryButton(
                 category = categories[index],
-                onUiAction = {}
+                onUiAction = onUiAction
             )
         }
     }
@@ -32,5 +36,5 @@ fun MainScreen(categories: List<Category>) {
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
-    MainScreen(listOf())
+    MainScreen(listOf(), {})
 }

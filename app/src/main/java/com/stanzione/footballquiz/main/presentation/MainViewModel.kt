@@ -3,12 +3,14 @@ package com.stanzione.footballquiz.main.presentation
 import androidx.lifecycle.ViewModel
 import com.stanzione.footballquiz.main.data.model.Category
 import com.stanzione.footballquiz.main.domain.usecase.GetCategoriesUseCase
+import com.stanzione.footballquiz.main.navigation.MainNavigation
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 
 class MainViewModel(
-    private val getCategoriesUseCase: GetCategoriesUseCase
+    private val getCategoriesUseCase: GetCategoriesUseCase,
+    private val mainNavigation: MainNavigation
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow<UiState>(UiState.Uninitialized)
@@ -24,8 +26,10 @@ class MainViewModel(
     val onUiAction: (UiAction) -> Unit = { uiAction ->
 
         when (uiAction) {
-            UiAction.Initialize -> getCategories()
-            else -> {}
+            is UiAction.Initialize -> getCategories()
+            is UiAction.CategorySelected -> {
+                mainNavigation.navigationToGame()
+            }
         }
 
     }

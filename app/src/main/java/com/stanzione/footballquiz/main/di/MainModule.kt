@@ -28,9 +28,10 @@ val mainModule = module {
         )
     }
 
-    viewModel {
+    viewModel { params ->
         MainViewModel(
-            getCategoriesUseCase = get()
+            getCategoriesUseCase = get(),
+            mainNavigation = params.get()
         )
     }
 
