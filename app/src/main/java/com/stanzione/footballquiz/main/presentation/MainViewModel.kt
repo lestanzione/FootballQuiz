@@ -25,6 +25,7 @@ class MainViewModel(
 
         when (uiAction) {
             UiAction.Initialize -> getCategories()
+            else -> {}
         }
 
     }
@@ -38,6 +39,7 @@ class MainViewModel(
 
     sealed class UiAction {
         object Initialize : UiAction()
+        data class CategorySelected(val category: Category) : UiAction()
     }
 
 }
