@@ -10,13 +10,22 @@ class GameViewModel : ViewModel() {
     val uiState: StateFlow<UiState> = _uiState
 
     private var answer = "?????"
+    private val letters = listOf("a", "c", "f", "s")
 
     val onUiAction: (UiAction) -> Unit = { uiAction ->
         when (uiAction) {
             is UiAction.Initialize -> {
                 _uiState.value = UiState.GameScreen(
                     answer = answer.toList(),
-                    letters = listOf("a", "c", "f", "s")
+                    letters = letters
+                )
+            }
+
+            is UiAction.LetterSelected -> {
+                answer = answer.replaceFirst("?", uiAction.letter)
+                _uiState.value = UiState.GameScreen(
+                    answer = answer.toList(),
+                    letters = letters
                 )
             }
         }
@@ -32,6 +41,9 @@ class GameViewModel : ViewModel() {
 
     sealed class UiAction {
         object Initialize : UiAction()
+        data class LetterSelected(
+            val letter: String
+        ) : UiAction()
     }
 
 }

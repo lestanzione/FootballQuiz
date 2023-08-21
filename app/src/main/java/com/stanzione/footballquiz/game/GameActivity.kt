@@ -12,6 +12,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.stanzione.footballquiz.game.GameViewModel.UiAction
 import com.stanzione.footballquiz.game.GameViewModel.UiState
 import com.stanzione.footballquiz.ui.theme.FootballQuizTheme
@@ -43,6 +44,7 @@ class GameActivity : ComponentActivity() {
                                 state.answer.forEach { char ->
                                     Text(
                                         text = char.toString(),
+                                        fontSize = 24.sp,
                                         modifier = Modifier.padding(4.dp),
                                         textDecoration = TextDecoration.Underline
                                     )
@@ -51,7 +53,11 @@ class GameActivity : ComponentActivity() {
 
                             Row {
                                 state.letters.forEach { letter ->
-                                    Button(onClick = { }) {
+                                    Button(onClick = {
+                                        gameViewModel.onUiAction(
+                                            UiAction.LetterSelected(letter)
+                                        )
+                                    }) {
                                         Text(text = letter)
                                     }
                                 }
