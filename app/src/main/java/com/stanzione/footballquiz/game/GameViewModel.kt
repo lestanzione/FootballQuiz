@@ -28,6 +28,17 @@ class GameViewModel : ViewModel() {
                     letters = letters
                 )
             }
+
+            is UiAction.LetterRemoved -> {
+                val sb = StringBuilder(answer).also {
+                    it.setCharAt(uiAction.index, '?')
+                }
+                answer = sb.toString()
+                _uiState.value = UiState.GameScreen(
+                    answer = answer.toList(),
+                    letters = letters
+                )
+            }
         }
     }
 
@@ -43,6 +54,9 @@ class GameViewModel : ViewModel() {
         object Initialize : UiAction()
         data class LetterSelected(
             val letter: String
+        ) : UiAction()
+        data class LetterRemoved(
+            val index: Int
         ) : UiAction()
     }
 

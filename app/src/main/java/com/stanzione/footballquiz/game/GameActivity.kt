@@ -3,6 +3,7 @@ package com.stanzione.footballquiz.game
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
@@ -41,11 +42,19 @@ class GameActivity : ComponentActivity() {
                         Column {
 
                             Row {
-                                state.answer.forEach { char ->
+                                state.answer.forEachIndexed { index, char ->
                                     Text(
                                         text = char.toString(),
                                         fontSize = 24.sp,
-                                        modifier = Modifier.padding(4.dp),
+                                        modifier = Modifier
+                                            .padding(4.dp)
+                                            .clickable {
+                                                gameViewModel.onUiAction(
+                                                    UiAction.LetterRemoved(
+                                                        index
+                                                    )
+                                                )
+                                            },
                                         textDecoration = TextDecoration.Underline
                                     )
                                 }
