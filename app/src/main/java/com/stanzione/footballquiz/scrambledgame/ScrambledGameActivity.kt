@@ -1,4 +1,4 @@
-package com.stanzione.footballquiz.game
+package com.stanzione.footballquiz.scrambledgame
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -15,26 +15,26 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.stanzione.footballquiz.game.GameViewModel.UiAction
-import com.stanzione.footballquiz.game.GameViewModel.UiState
+import com.stanzione.footballquiz.scrambledgame.ScrambledGameViewModel.UiAction
+import com.stanzione.footballquiz.scrambledgame.ScrambledGameViewModel.UiState
 import com.stanzione.footballquiz.ui.theme.FootballQuizTheme
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class GameActivity : ComponentActivity() {
+class ScrambledGameActivity : ComponentActivity() {
 
-    private val gameViewModel: GameViewModel by viewModel()
+    private val scrambledGameViewModel: ScrambledGameViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setContent {
 
-            val uiState = gameViewModel.uiState.collectAsState()
+            val uiState = scrambledGameViewModel.uiState.collectAsState()
 
             FootballQuizTheme {
                 when (val state = uiState.value) {
                     is UiState.Uninitialized -> {
-                        gameViewModel.onUiAction(UiAction.Initialize)
+                        scrambledGameViewModel.onUiAction(UiAction.Initialize)
                     }
 
                     is UiState.GameScreen -> {
@@ -42,11 +42,11 @@ class GameActivity : ComponentActivity() {
                         Column {
                             AnswerRow(
                                 answer = state.answer,
-                                onClick = gameViewModel.onUiAction
+                                onClick = scrambledGameViewModel.onUiAction
                             )
                             LettersRow(
                                 letters = state.letters,
-                                onClick = gameViewModel.onUiAction
+                                onClick = scrambledGameViewModel.onUiAction
                             )
                         }
                     }

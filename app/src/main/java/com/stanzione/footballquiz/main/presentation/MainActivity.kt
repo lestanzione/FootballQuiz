@@ -9,7 +9,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
-import com.stanzione.footballquiz.game.GameActivity
+import com.stanzione.footballquiz.scrambledgame.ScrambledGameActivity
 import com.stanzione.footballquiz.main.navigation.MainNavigation
 import com.stanzione.footballquiz.main.presentation.MainViewModel.UiAction
 import com.stanzione.footballquiz.main.presentation.MainViewModel.UiState
@@ -50,7 +50,7 @@ class MainActivity : ComponentActivity(), MainNavigation {
     }
 
     override fun navigationToGame() {
-        val intent = Intent(this, GameActivity::class.java)
+        val intent = Intent(this, ScrambledGameActivity::class.java)
         startActivity(intent)
     }
 }

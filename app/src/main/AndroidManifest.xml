@@ -14,7 +14,7 @@
         android:theme="@style/Theme.FootballQuiz"
         tools:targetApi="31">
         <activity
-            android:name=".game.GameActivity"
+            android:name=".scrambledgame.ScrambledGameActivity"
             android:exported="false" />
         <activity
             android:name=".main.presentation.MainActivity"
