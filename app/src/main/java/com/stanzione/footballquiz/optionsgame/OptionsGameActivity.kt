@@ -17,6 +17,7 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -27,27 +28,41 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
+import com.stanzione.footballquiz.optionsgame.OptionsGameViewModel.UiAction
 import com.stanzione.footballquiz.ui.theme.FootballQuizTheme
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class OptionsGameActivity : ComponentActivity() {
+
+    private val optionsGameViewModel: OptionsGameViewModel by viewModel()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setContent {
 
+            val uiState = optionsGameViewModel.uiState.collectAsState()
+
             FootballQuizTheme {
 
-                Column(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .background(Color.Red)
-                ) {
-                    Text(text = "Options Game Activity")
-                    Image()
-                    Title()
-                    Options()
-                }
+                when (val currentValue = uiState.value) {
+                    OptionsGameViewModel.UiState.Uninitialized -> {
+                        optionsGameViewModel.onUiAction(UiAction.Initialize)
+                    }
 
+                    is OptionsGameViewModel.UiState.GameScreen -> {
+                        Column(
+                            modifier = Modifier
+                                .fillMaxSize()
+                                .background(Color.Red)
+                        ) {
+                            Text(text = "Options Game Activity")
+                            Image(currentValue.imageUrl)
+                            Title(currentValue.title)
+                            Options(currentValue.options)
+                        }
+                    }
+                }
             }
 
         }
@@ -55,7 +70,7 @@ class OptionsGameActivity : ComponentActivity() {
 }
 
 @Composable
-private fun ColumnScope.Image() {
+private fun ColumnScope.Image(imageUrl: String) {
 
     Row(
         modifier = Modifier
@@ -69,7 +84,7 @@ private fun ColumnScope.Image() {
                 .fillMaxWidth()
                 .padding(16.dp),
             model = ImageRequest.Builder(LocalContext.current)
-                .data("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTjCjgVv-4Cl9Z-XQT3uCV_KKtjPzSNG-q2XA&usqp=CAU")
+                .data(imageUrl)
 //                                .data("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRl9WZZoHp9L7PktCD0MtwfZ3_Wtk_4MJnMjQ&usqp=CAU")
 //                                .placeholder(R.drawable.placeholder_thumbnail_list_item)
 //                                .error(R.drawable.placeholder_thumbnail_list_item)
@@ -81,19 +96,19 @@ private fun ColumnScope.Image() {
 }
 
 @Composable
-private fun Title() {
+private fun Title(title: String) {
     Text(
         modifier = Modifier
             .fillMaxWidth()
             .background(Color.Gray),
-        text = "Quem é esse jogador?",
+        text = title,
         fontSize = 20.sp,
         textAlign = TextAlign.Center
     )
 }
 
 @Composable
-private fun ColumnScope.Options() {
+private fun ColumnScope.Options(optionList: List<String>) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -101,13 +116,6 @@ private fun ColumnScope.Options() {
             .weight(3f),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        val options = listOf(
-            "Cristiano Ronaldo",
-            "Messi",
-            "Mbappé",
-            "Rony"
-        )
-
         LazyVerticalGrid(
             modifier = Modifier
                 .background(Color.Magenta),
@@ -116,9 +124,9 @@ private fun ColumnScope.Options() {
             verticalArrangement = Arrangement.spacedBy(8.dp),
             horizontalArrangement = Arrangement.spacedBy(8.dp)
         ) {
-            items(options.size) { index ->
+            items(optionList.size) { index ->
                 OptionButton(
-                    option = options[index]
+                    option = optionList[index]
                 )
             }
         }
