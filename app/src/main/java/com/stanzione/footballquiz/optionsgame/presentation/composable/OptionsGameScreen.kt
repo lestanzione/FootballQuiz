@@ -7,14 +7,14 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import com.stanzione.footballquiz.optionsgame.presentation.OptionsGameViewModel
+import com.stanzione.footballquiz.optionsgame.data.model.OptionQuestion
 import com.stanzione.footballquiz.optionsgame.presentation.composable.component.ImageBox
 import com.stanzione.footballquiz.optionsgame.presentation.composable.component.OptionsBox
 import com.stanzione.footballquiz.optionsgame.presentation.composable.component.Title
 
 @Composable
 fun OptionsGameScreen(
-    gameScreen: OptionsGameViewModel.UiState.GameScreen
+    optionQuestion: OptionQuestion
 ) {
     Column(
         modifier = Modifier
@@ -22,8 +22,8 @@ fun OptionsGameScreen(
             .background(Color.Red)
     ) {
         Text(text = "Options Game Activity")
-        ImageBox(gameScreen.imageUrl)
-        Title(gameScreen.title)
-        OptionsBox(gameScreen.options)
+        ImageBox(optionQuestion.imageUrl)
+        Title(optionQuestion.title)
+        OptionsBox(optionQuestion.optionList)
     }
 }

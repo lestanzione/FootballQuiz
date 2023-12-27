@@ -27,7 +27,7 @@ class OptionsGameActivity : ComponentActivity() {
                     }
 
                     is OptionsGameViewModel.UiState.GameScreen -> {
-                        OptionsGameScreen(currentValue)
+                        OptionsGameScreen(currentValue.optionQuestion)
                     }
                 }
             }
