@@ -28,7 +28,11 @@ class MainViewModel(
         when (uiAction) {
             is UiAction.Initialize -> getCategories()
             is UiAction.CategorySelected -> {
-                mainNavigation.navigationToGame()
+                if (uiAction.category.id == 1) {
+                    mainNavigation.navigateToOptionsGame()
+                } else {
+                    mainNavigation.navigateToScrambledGame()
+                }
             }
         }
 
