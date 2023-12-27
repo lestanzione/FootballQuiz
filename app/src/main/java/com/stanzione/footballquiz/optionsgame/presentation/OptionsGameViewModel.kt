@@ -1,4 +1,4 @@
-package com.stanzione.footballquiz.optionsgame
+package com.stanzione.footballquiz.optionsgame.presentation
 
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow

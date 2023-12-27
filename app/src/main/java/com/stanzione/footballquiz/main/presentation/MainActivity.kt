@@ -14,7 +14,7 @@ import com.stanzione.footballquiz.main.navigation.MainNavigation
 import com.stanzione.footballquiz.main.presentation.MainViewModel.UiAction
 import com.stanzione.footballquiz.main.presentation.MainViewModel.UiState
 import com.stanzione.footballquiz.main.presentation.composable.MainScreen
-import com.stanzione.footballquiz.optionsgame.OptionsGameActivity
+import com.stanzione.footballquiz.optionsgame.presentation.OptionsGameActivity
 import com.stanzione.footballquiz.ui.theme.FootballQuizTheme
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
