@@ -26,6 +26,21 @@ class OptionsGameViewModel : ViewModel() {
                     )
                 )
             }
+
+            UiAction.SelectOption -> {
+                _uiState.value = UiState.GameScreen(
+                    OptionQuestion(
+                        title = "Quem é esse jogador?",
+                        imageUrl = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTjCjgVv-4Cl9Z-XQT3uCV_KKtjPzSNG-q2XA&usqp=CAU",
+                        optionList = listOf(
+                            "Pelé",
+                            "Messi",
+                            "Benjamin",
+                            "Cristiano Ronaldo"
+                        )
+                    )
+                )
+            }
         }
     }
 
@@ -38,6 +53,7 @@ class OptionsGameViewModel : ViewModel() {
 
     sealed class UiAction {
         object Initialize : UiAction()
+        object SelectOption : UiAction()
     }
 
 }

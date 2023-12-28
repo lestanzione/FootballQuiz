@@ -13,9 +13,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import com.stanzione.footballquiz.optionsgame.presentation.OptionsGameViewModel.UiAction
 
 @Composable
-fun ColumnScope.OptionsBox(optionList: List<String>) {
+fun ColumnScope.OptionsBox(
+    optionList: List<String>,
+    onUiAction: (UiAction) -> Unit
+) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -33,7 +37,8 @@ fun ColumnScope.OptionsBox(optionList: List<String>) {
         ) {
             items(optionList.size) { index ->
                 OptionButton(
-                    option = optionList[index]
+                    option = optionList[index],
+                    onUiAction = onUiAction
                 )
             }
         }
