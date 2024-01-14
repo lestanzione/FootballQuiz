@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.runtime.collectAsState
+import com.stanzione.footballquiz.optionsgame.presentation.composable.EndGameScreen
 import com.stanzione.footballquiz.optionsgame.presentation.composable.OptionsGameScreen
 import com.stanzione.footballquiz.ui.theme.FootballQuizTheme
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -31,6 +32,10 @@ class OptionsGameActivity : ComponentActivity() {
                             optionQuestion = currentValue.optionQuestion,
                             onUiAction = optionsGameViewModel.onUiAction
                         )
+                    }
+
+                    OptionsGameViewModel.UiState.EndGame -> {
+                        EndGameScreen()
                     }
                 }
             }

@@ -38,7 +38,7 @@ class OptionsGameViewModel(
                     val nextOptionQuestion = optionQuestionList[nextIndex]
                     displayOptionQuestion(nextOptionQuestion)
                 } else {
-                    //todo finished quiz
+                    _uiState.value = UiState.EndGame
                 }
             }
         }
@@ -49,6 +49,7 @@ class OptionsGameViewModel(
         data class GameScreen(
             val optionQuestion: OptionQuestion
         ) : UiState()
+        object EndGame : UiState()
     }
 
     sealed class UiAction {
