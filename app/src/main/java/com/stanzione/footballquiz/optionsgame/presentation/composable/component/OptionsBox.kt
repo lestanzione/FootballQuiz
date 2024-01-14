@@ -38,7 +38,9 @@ fun ColumnScope.OptionsBox(
             items(optionList.size) { index ->
                 OptionButton(
                     option = optionList[index],
-                    onUiAction = onUiAction
+                    onSelect = {
+                        onUiAction(UiAction.SelectOption(index))
+                    }
                 )
             }
         }

@@ -13,7 +13,8 @@ class GetOptionQuestionListUseCaseImpl : GetOptionQuestionListUseCase {
                     "Messi",
                     "Mbappé",
                     "Rony"
-                )
+                ),
+                answerIndex = 1
             ),
             OptionQuestion(
                 title = "Quem é esse jogador?",
@@ -23,7 +24,8 @@ class GetOptionQuestionListUseCaseImpl : GetOptionQuestionListUseCase {
                     "Messi",
                     "Mbappé",
                     "Rony"
-                )
+                ),
+                answerIndex = 0
             ),
             OptionQuestion(
                 title = "Quem é esse jogador?",
@@ -33,7 +35,8 @@ class GetOptionQuestionListUseCaseImpl : GetOptionQuestionListUseCase {
                     "Messi",
                     "Mbappé",
                     "Rony"
-                )
+                ),
+                answerIndex = 2
             ),
             OptionQuestion(
                 title = "Quem é esse jogador?",
@@ -43,7 +46,8 @@ class GetOptionQuestionListUseCaseImpl : GetOptionQuestionListUseCase {
                     "Messi",
                     "Mbappé",
                     "Rony"
-                )
+                ),
+                answerIndex = 3
             ),
         )
     }

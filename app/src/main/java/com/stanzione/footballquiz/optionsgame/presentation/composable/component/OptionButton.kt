@@ -10,10 +10,10 @@ import com.stanzione.footballquiz.optionsgame.presentation.OptionsGameViewModel.
 @Composable
 fun OptionButton(
     option: String,
-    onUiAction: (UiAction) -> Unit
+    onSelect: () -> Unit
 ) {
     Button(onClick = {
-        onUiAction(UiAction.SelectOption)
+        onSelect()
     }) {
         Text(
             text = option,

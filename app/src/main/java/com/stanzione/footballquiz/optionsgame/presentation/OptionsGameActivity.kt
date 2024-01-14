@@ -34,8 +34,8 @@ class OptionsGameActivity : ComponentActivity() {
                         )
                     }
 
-                    OptionsGameViewModel.UiState.EndGame -> {
-                        EndGameScreen()
+                    is OptionsGameViewModel.UiState.EndGame -> {
+                        EndGameScreen(currentValue.points)
                     }
                 }
             }

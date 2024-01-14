@@ -15,6 +15,7 @@ class OptionsGameViewModel(
 
     private lateinit var optionQuestionList: List<OptionQuestion>
     private var optionQuestionIndex = -1
+    private var points = 0
 
     private fun getOptionQuestionList() {
         optionQuestionList = getOptionQuestionListUseCase.execute()
@@ -33,14 +34,26 @@ class OptionsGameViewModel(
             }
 
             is UiAction.SelectOption -> {
-                val nextIndex = optionQuestionIndex + 1
-                if (optionQuestionList.size > nextIndex) {
-                    val nextOptionQuestion = optionQuestionList[nextIndex]
-                    displayOptionQuestion(nextOptionQuestion)
-                } else {
-                    _uiState.value = UiState.EndGame
-                }
+                checkAnswer(uiAction.selectedIndex)
+                showNextQuestionOrEndGame()
             }
+        }
+    }
+
+    private fun checkAnswer(selectedIndex: Int) {
+        val answerIndex = optionQuestionList[optionQuestionIndex].answerIndex
+        if (selectedIndex == answerIndex) {
+            points++
+        }
+    }
+
+    private fun showNextQuestionOrEndGame() {
+        val nextIndex = optionQuestionIndex + 1
+        if (optionQuestionList.size > nextIndex) {
+            val nextOptionQuestion = optionQuestionList[nextIndex]
+            displayOptionQuestion(nextOptionQuestion)
+        } else {
+            _uiState.value = UiState.EndGame(points)
         }
     }
 
@@ -49,12 +62,16 @@ class OptionsGameViewModel(
         data class GameScreen(
             val optionQuestion: OptionQuestion
         ) : UiState()
-        object EndGame : UiState()
+        data class EndGame(
+            val points: Int
+        ) : UiState()
     }
 
     sealed class UiAction {
         object Initialize : UiAction()
-        object SelectOption : UiAction()
+        data class SelectOption(
+            val selectedIndex: Int
+        ) : UiAction()
     }
 
 }

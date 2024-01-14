@@ -12,13 +12,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun EndGameScreen() {
+fun EndGameScreen(
+    points: Int
+) {
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text(text = "End game")
+        Text(text = "End game: $points")
         Spacer(modifier = Modifier.height(8.dp))
         Text(text = "Back")
         Spacer(modifier = Modifier.height(8.dp))
