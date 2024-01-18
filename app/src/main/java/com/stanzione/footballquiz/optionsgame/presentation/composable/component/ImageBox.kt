@@ -20,7 +20,6 @@ fun ColumnScope.ImageBox(imageUrl: String) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .background(Color.Blue)
             .weight(5f),
         verticalAlignment = Alignment.CenterVertically
     ) {

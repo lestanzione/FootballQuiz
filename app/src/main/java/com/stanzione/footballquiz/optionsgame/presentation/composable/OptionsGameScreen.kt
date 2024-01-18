@@ -46,9 +46,7 @@ fun OptionsGameScreen(
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .background(Color.Red)
         ) {
-            Text(text = "Options Game Activity")
             ImageBox(targetState.imageUrl)
             Title(targetState.title)
             OptionsBox(

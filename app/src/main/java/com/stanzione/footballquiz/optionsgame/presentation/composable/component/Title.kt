@@ -13,8 +13,7 @@ import androidx.compose.ui.unit.sp
 fun Title(title: String) {
     Text(
         modifier = Modifier
-            .fillMaxWidth()
-            .background(Color.Gray),
+            .fillMaxWidth(),
         text = title,
         fontSize = 20.sp,
         textAlign = TextAlign.Center

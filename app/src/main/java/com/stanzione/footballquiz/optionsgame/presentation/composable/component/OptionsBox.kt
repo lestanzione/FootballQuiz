@@ -23,13 +23,10 @@ fun ColumnScope.OptionsBox(
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .background(Color.Green)
             .weight(3f),
         verticalAlignment = Alignment.CenterVertically
     ) {
         LazyVerticalGrid(
-            modifier = Modifier
-                .background(Color.Magenta),
             columns = GridCells.Fixed(2),
             contentPadding = PaddingValues(8.dp),
             verticalArrangement = Arrangement.spacedBy(8.dp),
