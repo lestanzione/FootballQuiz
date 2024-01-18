@@ -23,7 +23,11 @@ class OptionsGameViewModel(
 
     private fun displayOptionQuestion(optionQuestion: OptionQuestion) {
         optionQuestionIndex = optionQuestionList.indexOf(optionQuestion)
-        _uiState.value = UiState.GameScreen(optionQuestion)
+        _uiState.value = UiState.GameScreen(
+            currentQuestionNumber = optionQuestionIndex + 1,
+            totalQuestionNumber = optionQuestionList.size,
+            optionQuestion = optionQuestion
+        )
     }
 
     val onUiAction: (UiAction) -> Unit = { uiAction ->
@@ -60,8 +64,11 @@ class OptionsGameViewModel(
     sealed class UiState {
         object Uninitialized : UiState()
         data class GameScreen(
+            val currentQuestionNumber: Int,
+            val totalQuestionNumber: Int,
             val optionQuestion: OptionQuestion
         ) : UiState()
+
         data class EndGame(
             val points: Int
         ) : UiState()

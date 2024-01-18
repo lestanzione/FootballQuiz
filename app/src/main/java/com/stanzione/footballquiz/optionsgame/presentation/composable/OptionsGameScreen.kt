@@ -15,13 +15,30 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import com.stanzione.footballquiz.optionsgame.data.model.OptionQuestion
 import com.stanzione.footballquiz.optionsgame.presentation.OptionsGameViewModel.*
+import com.stanzione.footballquiz.optionsgame.presentation.composable.component.Header
 import com.stanzione.footballquiz.optionsgame.presentation.composable.component.ImageBox
 import com.stanzione.footballquiz.optionsgame.presentation.composable.component.OptionsBox
 import com.stanzione.footballquiz.optionsgame.presentation.composable.component.Title
 
-@OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun OptionsGameScreen(
+    currentQuestionNumber: Int,
+    totalQuestionNumber: Int,
+    optionQuestion: OptionQuestion,
+    onUiAction: (UiAction) -> Unit
+) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        Header(currentQuestionNumber, totalQuestionNumber)
+        Body(optionQuestion, onUiAction)
+    }
+}
+
+@OptIn(ExperimentalAnimationApi::class)
+@Composable
+private fun Body(
     optionQuestion: OptionQuestion,
     onUiAction: (UiAction) -> Unit
 ) {
@@ -37,16 +54,14 @@ fun OptionsGameScreen(
                 animationSpec = tween(CONTENT_ANIMATION_DURATION),
                 initialOffsetX = { fullWidth -> fullWidth }
             ) with
-                slideOutHorizontally(
-                    animationSpec = tween(CONTENT_ANIMATION_DURATION),
-                    targetOffsetX = { fullWidth -> -fullWidth }
-                )
+                    slideOutHorizontally(
+                        animationSpec = tween(CONTENT_ANIMATION_DURATION),
+                        targetOffsetX = { fullWidth -> -fullWidth }
+                    )
         }, label = "QuestionTransition"
     ) { targetState ->
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-        ) {
+
+        Column {
             ImageBox(targetState.imageUrl)
             Title(targetState.title)
             OptionsBox(
@@ -54,5 +69,6 @@ fun OptionsGameScreen(
                 onUiAction = onUiAction
             )
         }
+
     }
 }
