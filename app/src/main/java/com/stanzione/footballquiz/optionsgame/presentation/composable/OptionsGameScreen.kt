@@ -25,7 +25,7 @@ fun OptionsGameScreen(
     optionQuestion: OptionQuestion,
     onUiAction: (UiAction) -> Unit
 ) {
-    val CONTENT_ANIMATION_DURATION = 200
+    val CONTENT_ANIMATION_DURATION = 400
 
     AnimatedContent(
         targetState = optionQuestion,
