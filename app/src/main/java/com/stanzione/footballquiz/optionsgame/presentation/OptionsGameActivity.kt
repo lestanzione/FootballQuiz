@@ -35,11 +35,22 @@ class OptionsGameActivity : ComponentActivity() {
                     }
 
                     is OptionsGameViewModel.UiState.EndGame -> {
-                        EndGameScreen(currentValue.points)
+                        EndGameScreen(
+                            points = currentValue.points,
+                            onRestart = {
+                                restartGame()
+                            }
+                        )
                     }
                 }
             }
 
         }
     }
+
+    private fun restartGame() {
+        finish()
+        startActivity(intent)
+    }
+
 }
