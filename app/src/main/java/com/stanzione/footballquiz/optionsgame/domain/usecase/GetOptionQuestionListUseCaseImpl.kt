@@ -49,6 +49,28 @@ class GetOptionQuestionListUseCaseImpl : GetOptionQuestionListUseCase {
                 ),
                 answerIndex = 3
             ),
+            OptionQuestion(
+                title = "Quem é esse jogador?",
+                imageUrl = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR10YsRv4WdPqFl-W8KRa8w6_AAncGf8yeLng&usqp=CAU",
+                optionList = listOf(
+                    "Lewandowski",
+                    "Salah",
+                    "Gavi",
+                    "Militão"
+                ),
+                answerIndex = 0
+            ),
+            OptionQuestion(
+                title = "Quem é esse jogador?",
+                imageUrl = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ7qwKZI104pJwuzekNkyuBtzKYmmuvHO1nmg&usqp=CAU",
+                optionList = listOf(
+                    "Mané",
+                    "Rodrygo",
+                    "Vini Jr.",
+                    "Gabriel Jesus"
+                ),
+                answerIndex = 1
+            ),
         )
     }
 }
