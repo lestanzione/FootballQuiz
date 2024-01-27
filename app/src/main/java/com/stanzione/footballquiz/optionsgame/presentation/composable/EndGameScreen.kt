@@ -7,12 +7,19 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.material3.Button
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import com.stanzione.footballquiz.R
 
 @Composable
 fun EndGameScreen(
@@ -26,8 +33,23 @@ fun EndGameScreen(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text(text = "End game: $points")
-        Spacer(modifier = Modifier.height(8.dp))
+        Icon(
+            painter = painterResource(id = R.drawable.ic_trophy1),
+            contentDescription = null,
+            tint = Color.Unspecified
+        )
+        Text(
+            text = "Congratulations",
+            fontSize = 24.sp,
+            fontWeight = FontWeight.SemiBold
+        )
+        Spacer(modifier = Modifier.height(24.dp))
+        Text(
+            text = "$points / 6",
+            fontSize = 32.sp,
+            fontWeight = FontWeight.Light
+        )
+        Spacer(modifier = Modifier.height(24.dp))
         Button(
             onClick = {
                 (context as Activity).finish()
@@ -42,4 +64,13 @@ fun EndGameScreen(
         }
         Spacer(modifier = Modifier.height(8.dp))
     }
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun EndGameScreenPreview() {
+    EndGameScreen(
+        points = 0,
+        onRestart = {}
+    )
 }
