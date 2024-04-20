@@ -1,13 +1,18 @@
 package com.stanzione.footballquiz.optionsgame.presentation
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.stanzione.footballquiz.optionsgame.data.model.OptionQuestion
 import com.stanzione.footballquiz.optionsgame.domain.usecase.GetOptionQuestionListUseCase
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.launch
 
 class OptionsGameViewModel(
-    private val getOptionQuestionListUseCase: GetOptionQuestionListUseCase
+    private val getOptionQuestionListUseCase: GetOptionQuestionListUseCase,
+    private val dispatcher: CoroutineDispatcher = Dispatchers.Main.immediate
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow<UiState>(UiState.Uninitialized)
@@ -17,7 +22,14 @@ class OptionsGameViewModel(
     private var optionQuestionIndex = -1
     private var points = 0
 
-    private fun getOptionQuestionList() {
+    private fun initialize() {
+        viewModelScope.launch(dispatcher) {
+            getOptionQuestionList()
+            displayOptionQuestion(optionQuestionList.first())
+        }
+    }
+
+    private suspend fun getOptionQuestionList() {
         optionQuestionList = getOptionQuestionListUseCase.execute()
     }
 
@@ -33,8 +45,7 @@ class OptionsGameViewModel(
     val onUiAction: (UiAction) -> Unit = { uiAction ->
         when (uiAction) {
             UiAction.Initialize -> {
-                getOptionQuestionList()
-                displayOptionQuestion(optionQuestionList.first())
+                initialize()
             }
 
             is UiAction.SelectOption -> {
@@ -57,7 +68,10 @@ class OptionsGameViewModel(
             val nextOptionQuestion = optionQuestionList[nextIndex]
             displayOptionQuestion(nextOptionQuestion)
         } else {
-            _uiState.value = UiState.EndGame(points)
+            _uiState.value = UiState.EndGame(
+                points = points,
+                totalQuestionNumber = optionQuestionList.size
+            )
         }
     }
 
@@ -70,7 +84,8 @@ class OptionsGameViewModel(
         ) : UiState()
 
         data class EndGame(
-            val points: Int
+            val points: Int,
+            val totalQuestionNumber: Int
         ) : UiState()
     }
 

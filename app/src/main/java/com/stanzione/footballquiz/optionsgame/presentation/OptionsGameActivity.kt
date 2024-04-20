@@ -39,6 +39,7 @@ class OptionsGameActivity : ComponentActivity() {
                     is OptionsGameViewModel.UiState.EndGame -> {
                         EndGameScreen(
                             points = currentValue.points,
+                            totalQuestionNumber = currentValue.totalQuestionNumber,
                             onRestart = {
                                 restartGame()
                             }

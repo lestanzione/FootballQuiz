@@ -1,5 +1,12 @@
 package com.stanzione.footballquiz.optionsgame.di
 
+import com.google.firebase.firestore.FirebaseFirestore
+import com.stanzione.footballquiz.optionsgame.data.mapper.OptionQuestionMapper
+import com.stanzione.footballquiz.optionsgame.data.mapper.OptionQuestionMapperImpl
+import com.stanzione.footballquiz.optionsgame.data.repository.OptionQuestionRepositoryImpl
+import com.stanzione.footballquiz.optionsgame.data.repository.remote.datasource.OptionQuestionRemoteDataSource
+import com.stanzione.footballquiz.optionsgame.data.repository.remote.datasource.OptionQuestionRemoteDataSourceImpl
+import com.stanzione.footballquiz.optionsgame.domain.repository.OptionQuestionRepository
 import com.stanzione.footballquiz.optionsgame.domain.usecase.GetOptionQuestionListUseCase
 import com.stanzione.footballquiz.optionsgame.domain.usecase.GetOptionQuestionListUseCaseImpl
 import com.stanzione.footballquiz.optionsgame.presentation.OptionsGameViewModel
@@ -14,6 +21,25 @@ val optionsGameModule = module {
     }
 
     single<GetOptionQuestionListUseCase> {
-        GetOptionQuestionListUseCaseImpl()
+        GetOptionQuestionListUseCaseImpl(
+            optionQuestionRepository = get()
+        )
+    }
+
+    single<OptionQuestionRepository> {
+        OptionQuestionRepositoryImpl(
+            optionQuestionRemoteDataSource = get()
+        )
+    }
+
+    single<OptionQuestionRemoteDataSource> {
+        OptionQuestionRemoteDataSourceImpl(
+            firestore = FirebaseFirestore.getInstance(),
+            mapper = get()
+        )
+    }
+
+    single<OptionQuestionMapper> {
+        OptionQuestionMapperImpl()
     }
 }
