@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "367832191627",
+    "project_id": "football-quiz-1da6a",
+    "storage_bucket": "football-quiz-1da6a.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:367832191627:android:e295ae3ce61d06b0213a8e",
+        "android_client_info": {
+          "package_name": "com.stanzione.footballquiz"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDPtCjoIlA-Ar_tKG-9yFcfey1-xoJWb3s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
