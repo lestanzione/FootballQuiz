@@ -1,6 +1,7 @@
 package com.stanzione.footballquiz.category.presentation.composable
 
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -24,7 +25,10 @@ fun CategoriesScreen(
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         items(categories) { category ->
-            CategoryButton(category = category) {
+            CategoryButton(
+                category = category,
+                modifier = Modifier.fillMaxWidth(),
+            ) {
                 onUiAction(CategoriesViewModel.UiAction.CategorySelected(category))
             }
         }
