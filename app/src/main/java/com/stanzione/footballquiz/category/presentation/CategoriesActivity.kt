@@ -1,37 +1,40 @@
-package com.stanzione.footballquiz.main.presentation
+package com.stanzione.footballquiz.category.presentation
 
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
-import com.stanzione.footballquiz.category.presentation.CategoriesActivity
-import com.stanzione.footballquiz.scrambledgame.ScrambledGameActivity
-import com.stanzione.footballquiz.main.navigation.MainNavigation
-import com.stanzione.footballquiz.main.presentation.MainViewModel.UiAction
-import com.stanzione.footballquiz.main.presentation.MainViewModel.UiState
+import androidx.compose.ui.tooling.preview.Preview
+import com.stanzione.footballquiz.category.navigation.CategoriesNavigation
+import com.stanzione.footballquiz.category.presentation.CategoriesViewModel.UiAction
+import com.stanzione.footballquiz.category.presentation.CategoriesViewModel.UiState
+import com.stanzione.footballquiz.category.presentation.composable.CategoriesScreen
 import com.stanzione.footballquiz.main.presentation.composable.MainScreen
 import com.stanzione.footballquiz.optionsgame.presentation.OptionsGameActivity
 import com.stanzione.footballquiz.ui.theme.FootballQuizTheme
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
-class MainActivity : ComponentActivity(), MainNavigation {
+class CategoriesActivity : ComponentActivity(), CategoriesNavigation {
 
-    private val mainViewModel: MainViewModel by viewModel { parametersOf(this) }
+    private val categoriesViewModel: CategoriesViewModel by viewModel { parametersOf(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
 
-            val uiState = mainViewModel.uiState.collectAsState()
+            val uiState = categoriesViewModel.uiState.collectAsState()
 
             FootballQuizTheme {
-
                 // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
@@ -40,28 +43,17 @@ class MainActivity : ComponentActivity(), MainNavigation {
 
                     when (val state = uiState.value) {
                         is UiState.Uninitialized -> {
-                            mainViewModel.onUiAction(UiAction.Initialize)
+                            categoriesViewModel.onUiAction(UiAction.Initialize)
                         }
 
-                        is UiState.MainScreen -> MainScreen(
+                        is UiState.CategoriesScreen -> CategoriesScreen(
                             state.categories,
-                            mainViewModel.onUiAction
+                            categoriesViewModel.onUiAction
                         )
                     }
-
                 }
             }
         }
-    }
-
-    override fun navigateToCategoriesScreen() {
-        val intent = Intent(this, CategoriesActivity::class.java)
-        startActivity(intent)
-    }
-
-    override fun navigateToScrambledGame() {
-        val intent = Intent(this, ScrambledGameActivity::class.java)
-        startActivity(intent)
     }
 
     override fun navigateToOptionsGame() {

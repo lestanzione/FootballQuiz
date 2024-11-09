@@ -8,7 +8,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
-import com.stanzione.footballquiz.main.data.model.Category
+import com.stanzione.footballquiz.category.data.model.Category
 import com.stanzione.footballquiz.main.presentation.MainViewModel
 
 @Composable

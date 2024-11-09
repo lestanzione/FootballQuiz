@@ -1,6 +1,7 @@
 package com.stanzione.footballquiz
 
 import android.app.Application
+import com.stanzione.footballquiz.category.di.categoryModule
 import com.stanzione.footballquiz.scrambledgame.di.scrambledGameModule
 import com.stanzione.footballquiz.main.di.mainModule
 import com.stanzione.footballquiz.optionsgame.di.optionsGameModule
@@ -22,6 +23,7 @@ class AppApplication : Application() {
         androidContext(app)
         modules(
             mainModule,
+            categoryModule,
             scrambledGameModule,
             optionsGameModule
         )

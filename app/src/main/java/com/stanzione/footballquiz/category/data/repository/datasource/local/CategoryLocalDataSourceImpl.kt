@@ -1,6 +1,6 @@
-package com.stanzione.footballquiz.main.data.repository.datasource.local
+package com.stanzione.footballquiz.category.data.repository.datasource.local
 
-import com.stanzione.footballquiz.main.data.model.Category
+import com.stanzione.footballquiz.category.data.model.Category
 
 class CategoryLocalDataSourceImpl : CategoryLocalDataSource {
 

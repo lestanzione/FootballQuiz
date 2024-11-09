@@ -1,4 +1,4 @@
-package com.stanzione.footballquiz.main.data.model
+package com.stanzione.footballquiz.category.data.model
 
 data class Category(
     val id: Int,

@@ -16,6 +16,11 @@
         android:theme="@style/Theme.FootballQuiz"
         tools:targetApi="31">
         <activity
+            android:name=".category.presentation.CategoriesActivity"
+            android:exported="false"
+            android:label="@string/title_activity_categories"
+            android:theme="@style/Theme.FootballQuiz" />
+        <activity
             android:name=".optionsgame.presentation.OptionsGameActivity"
             android:exported="false" />
         <activity
