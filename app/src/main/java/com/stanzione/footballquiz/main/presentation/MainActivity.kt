@@ -10,12 +10,10 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import com.stanzione.footballquiz.category.presentation.CategoriesActivity
-import com.stanzione.footballquiz.scrambledgame.ScrambledGameActivity
 import com.stanzione.footballquiz.main.navigation.MainNavigation
 import com.stanzione.footballquiz.main.presentation.MainViewModel.UiAction
 import com.stanzione.footballquiz.main.presentation.MainViewModel.UiState
 import com.stanzione.footballquiz.main.presentation.composable.MainScreen
-import com.stanzione.footballquiz.optionsgame.presentation.OptionsGameActivity
 import com.stanzione.footballquiz.ui.theme.FootballQuizTheme
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
@@ -38,17 +36,15 @@ class MainActivity : ComponentActivity(), MainNavigation {
                     color = MaterialTheme.colorScheme.background
                 ) {
 
-                    when (val state = uiState.value) {
+                    when (uiState.value) {
                         is UiState.Uninitialized -> {
                             mainViewModel.onUiAction(UiAction.Initialize)
                         }
 
                         is UiState.MainScreen -> MainScreen(
-                            state.categories,
-                            mainViewModel.onUiAction
+                            onUiAction = mainViewModel.onUiAction
                         )
                     }
-
                 }
             }
         }
@@ -56,16 +52,6 @@ class MainActivity : ComponentActivity(), MainNavigation {
 
     override fun navigateToCategoriesScreen() {
         val intent = Intent(this, CategoriesActivity::class.java)
-        startActivity(intent)
-    }
-
-    override fun navigateToScrambledGame() {
-        val intent = Intent(this, ScrambledGameActivity::class.java)
-        startActivity(intent)
-    }
-
-    override fun navigateToOptionsGame() {
-        val intent = Intent(this, OptionsGameActivity::class.java)
         startActivity(intent)
     }
 }

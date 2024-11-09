@@ -1,6 +1,5 @@
 package com.stanzione.footballquiz.category.presentation.composable
 
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -11,7 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.stanzione.footballquiz.category.data.model.Category
 import com.stanzione.footballquiz.category.presentation.CategoriesViewModel
-import com.stanzione.footballquiz.main.presentation.composable.component.CategoryButton
+import com.stanzione.footballquiz.category.presentation.composable.component.CategoryButton
 
 @Composable
 fun CategoriesScreen(
