@@ -3,12 +3,14 @@ package com.stanzione.footballquiz.levels.presentation
 import androidx.lifecycle.ViewModel
 import com.stanzione.footballquiz.levels.data.model.Level
 import com.stanzione.footballquiz.levels.domain.usecase.GetLevelsUseCase
+import com.stanzione.footballquiz.levels.navigation.LevelsNavigation
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 
 class LevelsViewModel(
-    private val getLevelsUseCase: GetLevelsUseCase
+    private val getLevelsUseCase: GetLevelsUseCase,
+    private val levelsNavigation: LevelsNavigation
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow<UiState>(UiState.Uninitialized)
@@ -17,7 +19,7 @@ class LevelsViewModel(
     val onUiAction: (UiAction) -> Unit = { uiAction ->
         when (uiAction) {
             is UiAction.Initialize -> getLevels(uiAction.categoryId)
-            is UiAction.LevelSelected -> TODO()
+            is UiAction.LevelSelected -> levelsNavigation.navigateToOptionsGame()
         }
     }
 

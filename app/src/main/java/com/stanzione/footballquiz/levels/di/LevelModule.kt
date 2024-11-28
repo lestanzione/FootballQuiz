@@ -27,9 +27,10 @@ val levelModule = module {
         )
     }
 
-    viewModel {
+    viewModel { params ->
         LevelsViewModel(
-            getLevelsUseCase = get()
+            getLevelsUseCase = get(),
+            levelsNavigation = get()
         )
     }
 }
