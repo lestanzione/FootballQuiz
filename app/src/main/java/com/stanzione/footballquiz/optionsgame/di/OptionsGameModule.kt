@@ -4,6 +4,8 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.stanzione.footballquiz.optionsgame.data.mapper.OptionQuestionMapper
 import com.stanzione.footballquiz.optionsgame.data.mapper.OptionQuestionMapperImpl
 import com.stanzione.footballquiz.optionsgame.data.repository.OptionQuestionRepositoryImpl
+import com.stanzione.footballquiz.optionsgame.data.repository.local.datasource.OptionQuestionLocalDataSource
+import com.stanzione.footballquiz.optionsgame.data.repository.local.datasource.OptionQuestionLocalDataSourceImpl
 import com.stanzione.footballquiz.optionsgame.data.repository.remote.datasource.OptionQuestionRemoteDataSource
 import com.stanzione.footballquiz.optionsgame.data.repository.remote.datasource.OptionQuestionRemoteDataSourceImpl
 import com.stanzione.footballquiz.optionsgame.domain.repository.OptionQuestionRepository
@@ -28,7 +30,8 @@ val optionsGameModule = module {
 
     single<OptionQuestionRepository> {
         OptionQuestionRepositoryImpl(
-            optionQuestionRemoteDataSource = get()
+            optionQuestionRemoteDataSource = get(),
+            optionQuestionLocalDataSource = get()
         )
     }
 
@@ -37,6 +40,10 @@ val optionsGameModule = module {
             firestore = FirebaseFirestore.getInstance(),
             mapper = get()
         )
+    }
+
+    single<OptionQuestionLocalDataSource> {
+        OptionQuestionLocalDataSourceImpl()
     }
 
     single<OptionQuestionMapper> {

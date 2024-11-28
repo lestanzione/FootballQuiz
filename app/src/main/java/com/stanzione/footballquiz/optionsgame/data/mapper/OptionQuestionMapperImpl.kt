@@ -9,7 +9,8 @@ class OptionQuestionMapperImpl : OptionQuestionMapper {
             title = document.data?.get("title").toString(),
             imageUrl = document.data?.get("imageUrl").toString(),
             optionList = document.data?.get("optionList") as List<String>,
-            answerIndex = document.data?.get("answerIndex").toString().toInt()
+            answerIndex = document.data?.get("answerIndex").toString().toInt(),
+            levelId = listOf(1, 2) // TODO get from firestore
         )
     }
 }

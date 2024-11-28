@@ -19,7 +19,7 @@ class LevelsViewModel(
     val onUiAction: (UiAction) -> Unit = { uiAction ->
         when (uiAction) {
             is UiAction.Initialize -> getLevels(uiAction.categoryId)
-            is UiAction.LevelSelected -> levelsNavigation.navigateToOptionsGame()
+            is UiAction.LevelSelected -> levelsNavigation.navigateToOptionsGame(levelId = uiAction.level.id)
         }
     }
 

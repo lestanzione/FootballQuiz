@@ -22,15 +22,15 @@ class OptionsGameViewModel(
     private var optionQuestionIndex = -1
     private var points = 0
 
-    private fun initialize() {
+    private fun initialize(levelId: Int) {
         viewModelScope.launch(dispatcher) {
-            getOptionQuestionList()
+            getOptionQuestionList(levelId)
             displayOptionQuestion(optionQuestionList.first())
         }
     }
 
-    private suspend fun getOptionQuestionList() {
-        optionQuestionList = getOptionQuestionListUseCase.execute()
+    private suspend fun getOptionQuestionList(levelId: Int) {
+        optionQuestionList = getOptionQuestionListUseCase.execute(levelId)
     }
 
     private fun displayOptionQuestion(optionQuestion: OptionQuestion) {
@@ -44,8 +44,8 @@ class OptionsGameViewModel(
 
     val onUiAction: (UiAction) -> Unit = { uiAction ->
         when (uiAction) {
-            UiAction.Initialize -> {
-                initialize()
+            is UiAction.Initialize -> {
+                initialize(uiAction.levelId)
             }
 
             is UiAction.SelectOption -> {
@@ -90,7 +90,9 @@ class OptionsGameViewModel(
     }
 
     sealed class UiAction {
-        object Initialize : UiAction()
+        data class Initialize(
+            val levelId: Int
+        ) : UiAction()
         data class SelectOption(
             val selectedIndex: Int
         ) : UiAction()

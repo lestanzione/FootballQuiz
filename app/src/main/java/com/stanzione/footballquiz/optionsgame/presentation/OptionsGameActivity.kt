@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.runtime.collectAsState
+import com.stanzione.footballquiz.optionsgame.presentation.OptionsGameViewModel.*
 import com.stanzione.footballquiz.optionsgame.presentation.composable.EndGameScreen
 import com.stanzione.footballquiz.optionsgame.presentation.composable.OptionsGameScreen
 import com.stanzione.footballquiz.ui.theme.FootballQuizTheme
@@ -23,11 +24,15 @@ class OptionsGameActivity : ComponentActivity() {
             FootballQuizTheme {
 
                 when (val currentValue = uiState.value) {
-                    OptionsGameViewModel.UiState.Uninitialized -> {
-                        optionsGameViewModel.onUiAction(OptionsGameViewModel.UiAction.Initialize)
+                    UiState.Uninitialized -> {
+                        optionsGameViewModel.onUiAction(
+                            UiAction.Initialize(
+                                levelId = intent.getIntExtra(EXTRA_LEVEL_ID, 0)
+                            )
+                        )
                     }
 
-                    is OptionsGameViewModel.UiState.GameScreen -> {
+                    is UiState.GameScreen -> {
                         OptionsGameScreen(
                             currentQuestionNumber = currentValue.currentQuestionNumber,
                             totalQuestionNumber = currentValue.totalQuestionNumber,
@@ -36,7 +41,7 @@ class OptionsGameActivity : ComponentActivity() {
                         )
                     }
 
-                    is OptionsGameViewModel.UiState.EndGame -> {
+                    is UiState.EndGame -> {
                         EndGameScreen(
                             points = currentValue.points,
                             totalQuestionNumber = currentValue.totalQuestionNumber,
@@ -54,6 +59,10 @@ class OptionsGameActivity : ComponentActivity() {
     private fun restartGame() {
         finish()
         startActivity(intent)
+    }
+
+    companion object {
+        const val EXTRA_LEVEL_ID = "EXTRA_LEVEL_ID"
     }
 
 }

@@ -44,8 +44,10 @@ class LevelsActivity : ComponentActivity(), LevelsNavigation {
         }
     }
 
-    override fun navigateToOptionsGame() {
-        val intent = Intent(this, OptionsGameActivity::class.java)
+    override fun navigateToOptionsGame(levelId: Int) {
+        val intent = Intent(this, OptionsGameActivity::class.java).apply {
+            putExtra(OptionsGameActivity.EXTRA_LEVEL_ID, levelId)
+        }
         startActivity(intent)
     }
 

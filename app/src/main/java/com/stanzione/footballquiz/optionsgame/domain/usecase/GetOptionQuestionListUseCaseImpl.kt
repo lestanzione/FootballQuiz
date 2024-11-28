@@ -7,8 +7,8 @@ class GetOptionQuestionListUseCaseImpl(
     private val optionQuestionRepository: OptionQuestionRepository
 ) : GetOptionQuestionListUseCase {
 
-    override suspend fun execute(): List<OptionQuestion> {
-        return optionQuestionRepository.getQuestions()
+    override suspend fun execute(levelId: Int): List<OptionQuestion> {
+        return optionQuestionRepository.getQuestions(levelId)
 //        return listOf(
 //            OptionQuestion(
 //                title = "Quem é esse jogador?",
