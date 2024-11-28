@@ -18,6 +18,7 @@ import com.stanzione.footballquiz.category.navigation.CategoriesNavigation
 import com.stanzione.footballquiz.category.presentation.CategoriesViewModel.UiAction
 import com.stanzione.footballquiz.category.presentation.CategoriesViewModel.UiState
 import com.stanzione.footballquiz.category.presentation.composable.CategoriesScreen
+import com.stanzione.footballquiz.levels.presentation.LevelsActivity
 import com.stanzione.footballquiz.main.presentation.composable.MainScreen
 import com.stanzione.footballquiz.optionsgame.presentation.OptionsGameActivity
 import com.stanzione.footballquiz.ui.theme.FootballQuizTheme
@@ -58,6 +59,13 @@ class CategoriesActivity : ComponentActivity(), CategoriesNavigation {
 
     override fun navigateToOptionsGame() {
         val intent = Intent(this, OptionsGameActivity::class.java)
+        startActivity(intent)
+    }
+
+    override fun navigateToLevelsScreen(categoryId: Int) {
+        val intent = Intent(this, LevelsActivity::class.java).apply {
+            putExtra(LevelsActivity.EXTRA_CATEGORY_ID, categoryId)
+        }
         startActivity(intent)
     }
 }

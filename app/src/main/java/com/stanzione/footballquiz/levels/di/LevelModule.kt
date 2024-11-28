@@ -6,6 +6,8 @@ import com.stanzione.footballquiz.levels.data.repository.datasource.local.LevelL
 import com.stanzione.footballquiz.levels.domain.repository.LevelRepository
 import com.stanzione.footballquiz.levels.domain.usecase.GetLevelsUseCase
 import com.stanzione.footballquiz.levels.domain.usecase.GetLevelsUseCaseImpl
+import com.stanzione.footballquiz.levels.presentation.LevelsViewModel
+import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val levelModule = module {
@@ -22,6 +24,12 @@ val levelModule = module {
     single<GetLevelsUseCase> {
         GetLevelsUseCaseImpl(
             levelRepository = get()
+        )
+    }
+
+    viewModel {
+        LevelsViewModel(
+            getLevelsUseCase = get()
         )
     }
 }

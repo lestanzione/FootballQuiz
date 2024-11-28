@@ -30,7 +30,7 @@ class CategoriesViewModel(
             is UiAction.Initialize -> getCategories()
 
             is UiAction.CategorySelected -> {
-                categoriesNavigation.navigateToOptionsGame()
+                categoriesNavigation.navigateToLevelsScreen(uiAction.category.id)
 //                if (uiAction.category.id == 1) {
 //                    categoriesNavigation.navigateToOptionsGame()
 //                } else {
