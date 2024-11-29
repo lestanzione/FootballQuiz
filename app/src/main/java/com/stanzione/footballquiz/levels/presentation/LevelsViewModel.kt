@@ -24,7 +24,7 @@ class LevelsViewModel(
     }
 
     private fun getLevels(categoryId: Int) {
-        val levels = getLevelsUseCase.invoke(categoryId)
+        val levels = getLevelsUseCase.execute(categoryId)
         _uiState.update {
             UiState.LevelsScreen(
                 levels = levels

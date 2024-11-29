@@ -8,14 +8,15 @@ class GetLevelsUseCaseImpl(
     private val levelRepository: LevelRepository,
     private val pointRepository: PointRepository
 ) : GetLevelsUseCase {
-    override fun invoke(categoryId: Int): List<Level> {
+    override fun execute(categoryId: Int): List<Level> {
 
         val levels = levelRepository.getLevelsByCategoryId(categoryId)
-        val points = pointRepository.getPoints()
+        val points = pointRepository.getTotalPoints()
         println("LSTAN - points: $points")
 
         levels.forEach { level ->
             level.enabled = points >= level.minScoreToUnlock
+            level.score = pointRepository.getPoints(level.id)
         }
 
         return levels

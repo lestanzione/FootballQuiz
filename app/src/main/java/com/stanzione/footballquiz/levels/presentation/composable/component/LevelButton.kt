@@ -1,9 +1,11 @@
 package com.stanzione.footballquiz.levels.presentation.composable.component
 
+import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
@@ -20,16 +22,21 @@ fun LevelButton(
         onClick = onClick,
         enabled = level.enabled
     ) {
-        Text(
-            text = level.label,
-            textAlign = TextAlign.Center,
-            maxLines = 2,
-            overflow = TextOverflow.Ellipsis
-        )
+        Column {
+            Text(
+                text = level.label,
+                textAlign = TextAlign.Center,
+                maxLines = 2,
+                overflow = TextOverflow.Ellipsis
+            )
+            Text(
+                text = "${level.score} / ${level.questions}"
+            )
+        }
     }
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
 private fun LevelButtonEnabledPreview() {
     LevelButton(
@@ -40,14 +47,14 @@ private fun LevelButtonEnabledPreview() {
             minScoreToUnlock = 0,
             categoryId = 1,
             enabled = true,
-            score = 10,
+            score = 3,
         ),
         modifier = Modifier,
         onClick = {}
     )
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
 private fun LevelButtonDisabledPreview() {
     LevelButton(
@@ -58,7 +65,7 @@ private fun LevelButtonDisabledPreview() {
             minScoreToUnlock = 0,
             categoryId = 1,
             enabled = false,
-            score = 10,
+            score = 3,
         ),
         modifier = Modifier,
         onClick = {}
