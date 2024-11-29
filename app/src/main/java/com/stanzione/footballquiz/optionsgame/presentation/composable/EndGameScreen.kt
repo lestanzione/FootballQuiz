@@ -23,7 +23,7 @@ import com.stanzione.footballquiz.R
 
 @Composable
 fun EndGameScreen(
-    points: Int,
+    score: Int,
     totalQuestionNumber: Int,
     onRestart: () -> Unit
 ) {
@@ -46,7 +46,7 @@ fun EndGameScreen(
         )
         Spacer(modifier = Modifier.height(24.dp))
         Text(
-            text = "$points / $totalQuestionNumber",
+            text = "$score / $totalQuestionNumber",
             fontSize = 32.sp,
             fontWeight = FontWeight.Light
         )
@@ -71,7 +71,7 @@ fun EndGameScreen(
 @Composable
 private fun EndGameScreenPreview() {
     EndGameScreen(
-        points = 0,
+        score = 0,
         totalQuestionNumber = 0,
         onRestart = {}
     )

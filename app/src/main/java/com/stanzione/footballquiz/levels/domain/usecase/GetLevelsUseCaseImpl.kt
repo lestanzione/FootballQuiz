@@ -2,21 +2,21 @@ package com.stanzione.footballquiz.levels.domain.usecase
 
 import com.stanzione.footballquiz.levels.data.model.Level
 import com.stanzione.footballquiz.levels.domain.repository.LevelRepository
-import com.stanzione.footballquiz.points.domain.repository.PointRepository
+import com.stanzione.footballquiz.score.domain.repository.ScoreRepository
 
 class GetLevelsUseCaseImpl(
     private val levelRepository: LevelRepository,
-    private val pointRepository: PointRepository
+    private val scoreRepository: ScoreRepository
 ) : GetLevelsUseCase {
     override fun execute(categoryId: Int): List<Level> {
 
         val levels = levelRepository.getLevelsByCategoryId(categoryId)
-        val points = pointRepository.getTotalPoints()
-        println("LSTAN - points: $points")
+        val score = scoreRepository.getTotalScore()
+        println("LSTAN - score: $score")
 
         levels.forEach { level ->
-            level.enabled = points >= level.minScoreToUnlock
-            level.score = pointRepository.getPoints(level.id)
+            level.enabled = score >= level.minScoreToUnlock
+            level.score = scoreRepository.getScore(level.id)
         }
 
         return levels

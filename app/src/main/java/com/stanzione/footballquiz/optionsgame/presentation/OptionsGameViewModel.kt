@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.stanzione.footballquiz.optionsgame.data.model.OptionQuestion
 import com.stanzione.footballquiz.optionsgame.domain.usecase.GetOptionQuestionListUseCase
-import com.stanzione.footballquiz.optionsgame.domain.usecase.UpdateLevelPointsUseCase
+import com.stanzione.footballquiz.optionsgame.domain.usecase.UpdateLevelScoreUseCase
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -13,7 +13,7 @@ import kotlinx.coroutines.launch
 
 class OptionsGameViewModel(
     private val getOptionQuestionListUseCase: GetOptionQuestionListUseCase,
-    private val updateLevelPointsUseCase: UpdateLevelPointsUseCase,
+    private val updateLevelScoreUseCase: UpdateLevelScoreUseCase,
     private val dispatcher: CoroutineDispatcher = Dispatchers.Main.immediate
 ) : ViewModel() {
 
@@ -22,7 +22,7 @@ class OptionsGameViewModel(
 
     private lateinit var optionQuestionList: List<OptionQuestion>
     private var optionQuestionIndex = -1
-    private var points = 0
+    private var score = 0
     private var levelId = 0
 
     private fun initialize(levelId: Int) {
@@ -62,7 +62,7 @@ class OptionsGameViewModel(
     private fun checkAnswer(selectedIndex: Int) {
         val answerIndex = optionQuestionList[optionQuestionIndex].answerIndex
         if (selectedIndex == answerIndex) {
-            points++
+            score++
         }
     }
 
@@ -72,9 +72,9 @@ class OptionsGameViewModel(
             val nextOptionQuestion = optionQuestionList[nextIndex]
             displayOptionQuestion(nextOptionQuestion)
         } else {
-            updateLevelPointsUseCase.execute(levelId, points)
+            updateLevelScoreUseCase.execute(levelId, score)
             _uiState.value = UiState.EndGame(
-                points = points,
+                score = score,
                 totalQuestionNumber = optionQuestionList.size
             )
         }
@@ -89,7 +89,7 @@ class OptionsGameViewModel(
         ) : UiState()
 
         data class EndGame(
-            val points: Int,
+            val score: Int,
             val totalQuestionNumber: Int
         ) : UiState()
     }

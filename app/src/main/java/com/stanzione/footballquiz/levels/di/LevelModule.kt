@@ -24,7 +24,7 @@ val levelModule = module {
     single<GetLevelsUseCase> {
         GetLevelsUseCaseImpl(
             levelRepository = get(),
-            pointRepository = get()
+            scoreRepository = get()
         )
     }
 
