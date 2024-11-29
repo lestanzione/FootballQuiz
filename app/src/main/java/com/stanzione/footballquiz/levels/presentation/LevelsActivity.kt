@@ -4,7 +4,11 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.collectAsState
+import androidx.compose.ui.platform.LocalLifecycleOwner
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleEventObserver
 import com.stanzione.footballquiz.levels.navigation.LevelsNavigation
 import com.stanzione.footballquiz.levels.presentation.LevelsViewModel.*
 import com.stanzione.footballquiz.levels.presentation.composable.LevelsScreen
@@ -23,14 +27,30 @@ class LevelsActivity : ComponentActivity(), LevelsNavigation {
 
             val uiState = levelsViewModel.uiState.collectAsState()
 
-            FootballQuizTheme {
-                when (val currentValue = uiState.value) {
-                    UiState.Uninitialized -> {
+            val lifecycleOwner = LocalLifecycleOwner.current
+            DisposableEffect(lifecycleOwner) {
+                val observer = LifecycleEventObserver { _, event ->
+                    if (event == Lifecycle.Event.ON_RESUME) {
                         levelsViewModel.onUiAction(
                             UiAction.Initialize(
                                 categoryId = intent.getIntExtra(EXTRA_CATEGORY_ID, 0)
                             )
                         )
+                    }
+                }
+
+                lifecycleOwner.lifecycle.addObserver(observer)
+                onDispose { lifecycleOwner.lifecycle.removeObserver(observer) }
+            }
+
+            FootballQuizTheme {
+                when (val currentValue = uiState.value) {
+                    UiState.Uninitialized -> {
+//                        levelsViewModel.onUiAction(
+//                            UiAction.Initialize(
+//                                categoryId = intent.getIntExtra(EXTRA_CATEGORY_ID, 0)
+//                            )
+//                        )
                     }
 
                     is UiState.LevelsScreen -> {
