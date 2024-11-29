@@ -12,6 +12,7 @@ class GetLevelsUseCaseImpl(
 
         val levels = levelRepository.getLevelsByCategoryId(categoryId)
         val points = pointRepository.getPoints()
+        println("LSTAN - points: $points")
 
         levels.forEach { level ->
             level.enabled = points >= level.minScoreToUnlock
