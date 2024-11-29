@@ -6,6 +6,7 @@ import com.stanzione.footballquiz.levels.di.levelModule
 import com.stanzione.footballquiz.scrambledgame.di.scrambledGameModule
 import com.stanzione.footballquiz.main.di.mainModule
 import com.stanzione.footballquiz.optionsgame.di.optionsGameModule
+import com.stanzione.footballquiz.points.di.pointModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -27,7 +28,8 @@ class AppApplication : Application() {
             categoryModule,
             levelModule,
             scrambledGameModule,
-            optionsGameModule
+            optionsGameModule,
+            pointModule,
         )
     }
 

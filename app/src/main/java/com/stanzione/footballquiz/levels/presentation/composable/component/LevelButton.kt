@@ -17,7 +17,8 @@ fun LevelButton(
 ) {
     Button(
         modifier = modifier,
-        onClick = onClick
+        onClick = onClick,
+        enabled = level.enabled
     ) {
         Text(
             text = level.label,
@@ -30,15 +31,34 @@ fun LevelButton(
 
 @Preview
 @Composable
-private fun LevelButtonPreview() {
+private fun LevelButtonEnabledPreview() {
     LevelButton(
         level = Level(
             id = 1,
             label = "Level",
-            enabled = true,
             questions = 10,
-            score = 10,
+            minScoreToUnlock = 0,
             categoryId = 1,
+            enabled = true,
+            score = 10,
+        ),
+        modifier = Modifier,
+        onClick = {}
+    )
+}
+
+@Preview
+@Composable
+private fun LevelButtonDisabledPreview() {
+    LevelButton(
+        level = Level(
+            id = 1,
+            label = "Level",
+            questions = 10,
+            minScoreToUnlock = 0,
+            categoryId = 1,
+            enabled = false,
+            score = 10,
         ),
         modifier = Modifier,
         onClick = {}

@@ -23,7 +23,8 @@ val levelModule = module {
 
     single<GetLevelsUseCase> {
         GetLevelsUseCaseImpl(
-            levelRepository = get()
+            levelRepository = get(),
+            pointRepository = get()
         )
     }
 

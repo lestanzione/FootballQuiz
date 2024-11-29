@@ -1,6 +1,7 @@
 package com.stanzione.footballquiz.levels.data.repository.datasource.local
 
 import com.stanzione.footballquiz.levels.data.model.Level
+import kotlin.math.min
 
 class LevelLocalDataSourceImpl : LevelLocalDataSource {
     override fun getLevelsByCategoryId(categoryId: Int): List<Level> {
@@ -15,34 +16,38 @@ class LevelLocalDataSourceImpl : LevelLocalDataSource {
             Level(
                 id = 1,
                 label = "Level 1",
-                enabled = true,
                 questions = 10,
+                minScoreToUnlock = 0,
+                categoryId = 1,
+                enabled = true,
                 score = 0,
-                categoryId = 1
             ),
             Level(
                 id = 2,
                 label = "Level 2",
-                enabled = false,
                 questions = 10,
+                minScoreToUnlock = 5,
+                categoryId = 1,
+                enabled = false,
                 score = 0,
-                categoryId = 1
             ),
             Level(
                 id = 3,
                 label = "Level 3",
-                enabled = false,
                 questions = 10,
+                minScoreToUnlock = 10,
+                categoryId = 1,
+                enabled = false,
                 score = 0,
-                categoryId = 1
             ),
             Level(
                 id = 1000,
                 label = "Level 1",
-                enabled = true,
                 questions = 10,
+                minScoreToUnlock = 20,
+                categoryId = 2,
+                enabled = true,
                 score = 0,
-                categoryId = 2
             ),
         )
     }
