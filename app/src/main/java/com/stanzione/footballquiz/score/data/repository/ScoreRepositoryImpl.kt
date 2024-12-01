@@ -14,6 +14,10 @@ class ScoreRepositoryImpl : ScoreRepository {
     }
 
     override fun setScore(levelId: Int, score: Int) {
-        levelScoresMap[levelId] = score
+        val currentScore = levelScoresMap[levelId] ?: 0
+
+        if (score > currentScore) {
+            levelScoresMap[levelId] = score
+        }
     }
 }

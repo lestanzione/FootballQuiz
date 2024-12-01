@@ -34,7 +34,7 @@ class LevelLocalDataSourceImpl : LevelLocalDataSource {
                 id = 3,
                 label = "Level 3",
                 questions = 10,
-                minScoreToUnlock = 4,
+                minScoreToUnlock = 5,
                 categoryId = 1,
                 enabled = false,
                 score = 0,
