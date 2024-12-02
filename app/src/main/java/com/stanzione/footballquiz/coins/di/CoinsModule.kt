@@ -4,6 +4,8 @@ import com.stanzione.footballquiz.coins.data.repository.CoinsRepositoryImpl
 import com.stanzione.footballquiz.coins.data.repository.datasource.local.CoinsLocalDataSource
 import com.stanzione.footballquiz.coins.data.repository.datasource.local.CoinsLocalDataSourceImpl
 import com.stanzione.footballquiz.coins.domain.repository.CoinsRepository
+import com.stanzione.footballquiz.coins.domain.usecase.AddCoinsUseCase
+import com.stanzione.footballquiz.coins.domain.usecase.AddCoinsUseCaseImpl
 import com.stanzione.footballquiz.coins.domain.usecase.GetCoinsUseCase
 import com.stanzione.footballquiz.coins.domain.usecase.GetCoinsUseCaseImpl
 import org.koin.dsl.module
@@ -21,6 +23,12 @@ val coinsModule = module {
 
     single<GetCoinsUseCase> {
         GetCoinsUseCaseImpl(
+            coinsRepository = get()
+        )
+    }
+
+    single<AddCoinsUseCase> {
+        AddCoinsUseCaseImpl(
             coinsRepository = get()
         )
     }

@@ -43,6 +43,7 @@ class OptionsGameActivity : ComponentActivity() {
 
                     is UiState.EndGame -> {
                         EndGameScreen(
+                            coins = currentValue.coins,
                             score = currentValue.score,
                             totalQuestionNumber = currentValue.totalQuestionNumber,
                             onRestart = {

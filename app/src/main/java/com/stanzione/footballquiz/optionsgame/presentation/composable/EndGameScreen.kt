@@ -23,6 +23,7 @@ import com.stanzione.footballquiz.R
 
 @Composable
 fun EndGameScreen(
+    coins: Int,
     score: Int,
     totalQuestionNumber: Int,
     onRestart: () -> Unit
@@ -51,6 +52,12 @@ fun EndGameScreen(
             fontWeight = FontWeight.Light
         )
         Spacer(modifier = Modifier.height(24.dp))
+        Text(
+            text = "Earned $coins coins",
+            fontSize = 22.sp,
+            fontWeight = FontWeight.Light
+        )
+        Spacer(modifier = Modifier.height(24.dp))
         Button(
             onClick = {
                 (context as Activity).finish()
@@ -71,6 +78,7 @@ fun EndGameScreen(
 @Composable
 private fun EndGameScreenPreview() {
     EndGameScreen(
+        coins = 0,
         score = 0,
         totalQuestionNumber = 0,
         onRestart = {}

@@ -2,6 +2,7 @@ package com.stanzione.footballquiz.optionsgame.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.stanzione.footballquiz.coins.domain.usecase.AddCoinsUseCase
 import com.stanzione.footballquiz.optionsgame.data.model.OptionQuestion
 import com.stanzione.footballquiz.optionsgame.domain.usecase.GetOptionQuestionListUseCase
 import com.stanzione.footballquiz.optionsgame.domain.usecase.UpdateLevelScoreUseCase
@@ -14,6 +15,7 @@ import kotlinx.coroutines.launch
 class OptionsGameViewModel(
     private val getOptionQuestionListUseCase: GetOptionQuestionListUseCase,
     private val updateLevelScoreUseCase: UpdateLevelScoreUseCase,
+    private val addCoinsUseCase: AddCoinsUseCase,
     private val dispatcher: CoroutineDispatcher = Dispatchers.Main.immediate
 ) : ViewModel() {
 
@@ -72,8 +74,11 @@ class OptionsGameViewModel(
             val nextOptionQuestion = optionQuestionList[nextIndex]
             displayOptionQuestion(nextOptionQuestion)
         } else {
+            val coins = score * 10
             updateLevelScoreUseCase.execute(levelId, score)
+            addCoinsUseCase.execute(coins)
             _uiState.value = UiState.EndGame(
+                coins = coins,
                 score = score,
                 totalQuestionNumber = optionQuestionList.size
             )
@@ -89,6 +94,7 @@ class OptionsGameViewModel(
         ) : UiState()
 
         data class EndGame(
+            val coins: Int,
             val score: Int,
             val totalQuestionNumber: Int
         ) : UiState()
@@ -98,6 +104,7 @@ class OptionsGameViewModel(
         data class Initialize(
             val levelId: Int
         ) : UiAction()
+
         data class SelectOption(
             val selectedIndex: Int
         ) : UiAction()

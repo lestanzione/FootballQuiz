@@ -22,6 +22,7 @@ val optionsGameModule = module {
         OptionsGameViewModel(
             getOptionQuestionListUseCase = get(),
             updateLevelScoreUseCase = get(),
+            addCoinsUseCase = get(),
         )
     }
 
