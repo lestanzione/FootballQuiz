@@ -55,6 +55,7 @@ class LevelsActivity : ComponentActivity(), LevelsNavigation {
 
                     is UiState.LevelsScreen -> {
                         LevelsScreen(
+                            coins = currentValue.coins,
                             levels = currentValue.levels,
                             onUiAction = levelsViewModel.onUiAction
                         )

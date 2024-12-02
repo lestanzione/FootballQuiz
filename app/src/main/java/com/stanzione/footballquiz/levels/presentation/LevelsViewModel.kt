@@ -1,6 +1,7 @@
 package com.stanzione.footballquiz.levels.presentation
 
 import androidx.lifecycle.ViewModel
+import com.stanzione.footballquiz.coins.domain.usecase.GetCoinsUseCase
 import com.stanzione.footballquiz.levels.data.model.Level
 import com.stanzione.footballquiz.levels.domain.usecase.GetLevelsUseCase
 import com.stanzione.footballquiz.levels.navigation.LevelsNavigation
@@ -9,6 +10,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 
 class LevelsViewModel(
+    private val getCoinsUseCase: GetCoinsUseCase,
     private val getLevelsUseCase: GetLevelsUseCase,
     private val levelsNavigation: LevelsNavigation
 ) : ViewModel() {
@@ -24,9 +26,11 @@ class LevelsViewModel(
     }
 
     private fun getLevels(categoryId: Int) {
+        val coins = getCoinsUseCase.execute()
         val levels = getLevelsUseCase.execute(categoryId)
         _uiState.update {
             UiState.LevelsScreen(
+                coins = coins,
                 levels = levels
             )
         }
@@ -35,6 +39,7 @@ class LevelsViewModel(
     sealed class UiState {
         object Uninitialized : UiState()
         data class LevelsScreen(
+            val coins: Int,
             val levels: List<Level>
         ) : UiState()
     }

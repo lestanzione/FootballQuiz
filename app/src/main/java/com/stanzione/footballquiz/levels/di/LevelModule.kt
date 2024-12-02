@@ -30,6 +30,7 @@ val levelModule = module {
 
     viewModel { params ->
         LevelsViewModel(
+            getCoinsUseCase = get(),
             getLevelsUseCase = get(),
             levelsNavigation = params.get()
         )
