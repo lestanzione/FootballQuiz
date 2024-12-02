@@ -5,6 +5,7 @@ data class Level(
     val label: String,
     val questions: Int,
     val minScoreToUnlock: Int,
+    val coinsToUnlock: Int,
     val categoryId: Int,
     var enabled: Boolean,
     var score: Int,

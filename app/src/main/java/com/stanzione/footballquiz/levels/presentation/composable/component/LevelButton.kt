@@ -88,7 +88,7 @@ private fun LevelDisabled(
                 overflow = TextOverflow.Ellipsis
             )
             Text(
-                text = "${level.score} / ${level.minScoreToUnlock} to unlock"
+                text = "${level.score} / ${level.minScoreToUnlock} or ${level.coinsToUnlock} coins to unlock"
             )
         }
     }
@@ -103,6 +103,7 @@ private fun LevelButtonEnabledPreview() {
             label = "Level asd asd asdasd asd ad asdsa da dsadasd asd asd asd asd asd ad as",
             questions = 10,
             minScoreToUnlock = 0,
+            coinsToUnlock = 0,
             categoryId = 1,
             enabled = true,
             score = 3,
@@ -121,6 +122,7 @@ private fun LevelButtonDisabledPreview() {
             label = "Level",
             questions = 10,
             minScoreToUnlock = 20,
+            coinsToUnlock = 100,
             categoryId = 1,
             enabled = false,
             score = 3,
