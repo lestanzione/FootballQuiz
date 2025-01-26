@@ -23,6 +23,7 @@ import androidx.compose.ui.window.Dialog
 fun UnlockLevelDialog(
     coinsToUnlock: Int,
     onDismiss: () -> Unit,
+    onUnlock: () -> Unit,
 ) {
     Dialog(
         onDismissRequest = onDismiss
@@ -52,7 +53,7 @@ fun UnlockLevelDialog(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceEvenly
             ) {
-                Button(onClick = onDismiss) {
+                Button(onClick = onUnlock) {
                     Text(
                         text = "Use $coinsToUnlock coins"
                     )
@@ -72,6 +73,7 @@ fun UnlockLevelDialog(
 private fun UnlockLevelDialogPreview() {
     UnlockLevelDialog(
         coinsToUnlock = 10,
-        onDismiss = {}
+        onDismiss = {},
+        onUnlock = {}
     )
 }

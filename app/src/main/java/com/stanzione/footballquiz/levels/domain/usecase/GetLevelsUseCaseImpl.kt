@@ -11,14 +11,31 @@ class GetLevelsUseCaseImpl(
     override fun execute(categoryId: Int): List<Level> {
 
         val levels = levelRepository.getLevelsByCategoryId(categoryId)
+        val unlockedLevelIds = levelRepository.getAllUnlockedLevelIds()
         val score = scoreRepository.getTotalScore()
         println("LSTAN - score: $score")
 
         levels.forEach { level ->
-            level.enabled = score >= level.minScoreToUnlock
+            level.enabled = isLevelUnlocked(
+                level,
+                score,
+                unlockedLevelIds
+            )
             level.score = scoreRepository.getScore(level.id)
         }
 
         return levels
+    }
+
+    private fun isLevelUnlocked(level: Level, score: Int, unlockedLevelIds: List<Int>): Boolean {
+        if (unlockedLevelIds.contains(level.id)) {
+            return true
+        }
+
+        if (score >= level.minScoreToUnlock) {
+            return true
+        }
+
+        return false
     }
 }

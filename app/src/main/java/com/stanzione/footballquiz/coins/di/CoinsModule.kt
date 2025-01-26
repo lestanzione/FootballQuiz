@@ -8,6 +8,8 @@ import com.stanzione.footballquiz.coins.domain.usecase.AddCoinsUseCase
 import com.stanzione.footballquiz.coins.domain.usecase.AddCoinsUseCaseImpl
 import com.stanzione.footballquiz.coins.domain.usecase.GetCoinsUseCase
 import com.stanzione.footballquiz.coins.domain.usecase.GetCoinsUseCaseImpl
+import com.stanzione.footballquiz.coins.domain.usecase.RemoveCoinsUseCase
+import com.stanzione.footballquiz.coins.domain.usecase.RemoveCoinsUseCaseImpl
 import org.koin.dsl.module
 
 val coinsModule = module {
@@ -29,6 +31,12 @@ val coinsModule = module {
 
     single<AddCoinsUseCase> {
         AddCoinsUseCaseImpl(
+            coinsRepository = get()
+        )
+    }
+
+    single<RemoveCoinsUseCase> {
+        RemoveCoinsUseCaseImpl(
             coinsRepository = get()
         )
     }

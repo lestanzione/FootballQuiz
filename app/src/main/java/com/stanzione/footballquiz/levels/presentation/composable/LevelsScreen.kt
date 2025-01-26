@@ -20,6 +20,8 @@ import com.stanzione.footballquiz.levels.data.model.Level
 import com.stanzione.footballquiz.levels.presentation.LevelsViewModel
 import com.stanzione.footballquiz.levels.presentation.composable.component.LevelButton
 
+private var levelToUnlock: Level? = null
+
 @Composable
 fun LevelsScreen(
     coins: Int,
@@ -50,11 +52,10 @@ fun LevelsScreen(
                     if (level.enabled) {
                         onUiAction(LevelsViewModel.UiAction.LevelSelected(level))
                     } else {
+                        levelToUnlock = level
                         showUnlockLevelDialog = level.coinsToUnlock
                     }
                 }
-
-
             }
         }
     }
@@ -64,6 +65,11 @@ fun LevelsScreen(
             coinsToUnlock = showUnlockLevelDialog,
             onDismiss = {
                 showUnlockLevelDialog = 0
+            },
+            onUnlock = {
+                onUiAction(LevelsViewModel.UiAction.UnlockLevel(levelToUnlock!!))
+                showUnlockLevelDialog = 0
+                onUiAction(LevelsViewModel.UiAction.LevelSelected(levelToUnlock!!))
             }
         )
     }

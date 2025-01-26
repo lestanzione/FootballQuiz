@@ -1,7 +1,7 @@
 package com.stanzione.footballquiz.coins.data.repository.datasource.local
 
 class CoinsLocalDataSourceImpl : CoinsLocalDataSource {
-    private var coins: Int = 0
+    private var coins: Int = 100
 
     override fun getCoins(): Int {
         return coins

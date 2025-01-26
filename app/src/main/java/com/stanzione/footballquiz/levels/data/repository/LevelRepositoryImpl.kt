@@ -10,4 +10,12 @@ class LevelRepositoryImpl(
     override fun getLevelsByCategoryId(categoryId: Int): List<Level> {
         return levelLocalDataSource.getLevelsByCategoryId(categoryId)
     }
+
+    override fun getAllUnlockedLevelIds(): List<Int> {
+        return levelLocalDataSource.getAllUnlockedLevelIds()
+    }
+
+    override fun addUnlockedLevel(levelId: Int) {
+        levelLocalDataSource.addUnlockedLevel(levelId)
+    }
 }

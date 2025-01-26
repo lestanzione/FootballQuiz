@@ -3,11 +3,21 @@ package com.stanzione.footballquiz.levels.data.repository.datasource.local
 import com.stanzione.footballquiz.levels.data.model.Level
 
 class LevelLocalDataSourceImpl : LevelLocalDataSource {
+    private val unlockedLevelList = mutableListOf<Int>()
+
     override fun getLevelsByCategoryId(categoryId: Int): List<Level> {
         return getAllLevels()
             .filter { level ->
                 level.categoryId == categoryId
             }
+    }
+
+    override fun getAllUnlockedLevelIds(): List<Int> {
+        return unlockedLevelList
+    }
+
+    override fun addUnlockedLevel(levelId: Int) {
+        unlockedLevelList.add(levelId)
     }
 
     private fun getAllLevels(): List<Level> {
