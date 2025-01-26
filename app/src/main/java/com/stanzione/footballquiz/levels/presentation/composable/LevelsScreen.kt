@@ -9,6 +9,10 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -22,6 +26,10 @@ fun LevelsScreen(
     levels: List<Level>,
     onUiAction: (LevelsViewModel.UiAction) -> Unit
 ) {
+    var showUnlockLevelDialog by remember {
+        mutableStateOf(0)
+    }
+
     Column {
         Row {
             Text(
@@ -39,9 +47,24 @@ fun LevelsScreen(
                     level = level,
                     modifier = Modifier.fillMaxWidth(),
                 ) {
-                    onUiAction(LevelsViewModel.UiAction.LevelSelected(level))
+                    if (level.enabled) {
+                        onUiAction(LevelsViewModel.UiAction.LevelSelected(level))
+                    } else {
+                        showUnlockLevelDialog = level.coinsToUnlock
+                    }
                 }
+
+
             }
         }
+    }
+
+    if (showUnlockLevelDialog != 0) {
+        UnlockLevelDialog(
+            coinsToUnlock = showUnlockLevelDialog,
+            onDismiss = {
+                showUnlockLevelDialog = 0
+            }
+        )
     }
 }
